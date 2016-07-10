@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<touristVouchers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="TouristVoucherScheme.xsd">
+
+    <touristVoucher id="TV-0023">
+        <voucherKind>RECREATION</voucherKind>
+        <country>USA</country>
+        <numberOfDays>15</numberOfDays>
+        <transport>PLANE</transport>
+        <hotelCharacteristics>
+            <hotelStars>4</hotelStars>
+            <nutrition>HALF_BOARD</nutrition>
+            <roomsNumber>2</roomsNumber>
+            <!--Zero or more repetitions:-->
+            <additionalDevice>TV</additionalDevice>
+            <additionalDevice>Conditioner</additionalDevice>
+        </hotelCharacteristics>
+        <voucherCost>3000</voucherCost>
+    </touristVoucher>
+
+    <touristVoucher id="TV-0014">
+        <voucherKind>EXCURSION</voucherKind>
+        <country>France</country>
+        <numberOfDays>7</numberOfDays>
+        <transport>CAR</transport>
+        <hotelCharacteristics>
+            <hotelStars>5</hotelStars>
+            <nutrition>ALL_INCLUSIVE</nutrition>
+            <roomsNumber>2</roomsNumber>
+            <!--Zero or more repetitions:-->
+            <additionalDevice>TV</additionalDevice>
+            <additionalDevice>Conditioner</additionalDevice>
+            <additionalDevice>Fridge</additionalDevice>
+        </hotelCharacteristics>
+        <voucherCost>1700</voucherCost>
+    </touristVoucher>
+
+    <touristVoucher id="FRT-1725">
+        <voucherKind>PILGRIMAGE</voucherKind>
+        <country>India</country>
+        <numberOfDays>40</numberOfDays>
+        <transport>TRAIN</transport>
+        <hotelCharacteristics>
+            <hotelStars>1</hotelStars>
+            <nutrition>ONLY_BED</nutrition>
+            <roomsNumber>1</roomsNumber>
+        </hotelCharacteristics>
+        <voucherCost>500</voucherCost>
+    </touristVoucher>
+</touristVouchers>

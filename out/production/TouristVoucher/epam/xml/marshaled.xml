@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<touristVouchersType>
+    <touristVoucher id="TV-0007">
+        <voucherKind>RECREATION</voucherKind>
+        <country>Spain</country>
+        <numberOfDays>20</numberOfDays>
+        <transport>CAR</transport>
+        <hotelCharacteristics hotelStars="5">
+            <nutrition>ALL_INCLUSIVE</nutrition>
+            <roomsNumber>3</roomsNumber>
+        </hotelCharacteristics>
+        <voucherCost>3000</voucherCost>
+    </touristVoucher>
+</touristVouchersType>

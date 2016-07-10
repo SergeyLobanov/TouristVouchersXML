@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="touristVouchers" type="touristVouchersType"/>
+    <xs:complexType name="touristVouchersType">
+        <xs:sequence>
+            <xs:element name="touristVoucher" type="touristVoucherType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="touristVoucherType">
+        <xs:sequence>
+            <xs:element name="voucherKind" type="voucherKindType"/>
+            <xs:element name="country">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-zA-Z ]+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="numberOfDays" type="xs:positiveInteger"/>
+            <xs:element name="transport" type="transportType"/>
+            <xs:element name="hotelCharacteristics" type="hotelCharacteristicsType"/>
+            <xs:element name="voucherCost" type="xs:positiveInteger"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="voucherKindType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WEEKEND"/>
+            <xs:enumeration value="EXCURSION"/>
+            <xs:enumeration value="RECREATION"/>
+            <xs:enumeration value="PILGRIMAGE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="transportType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PLANE"/>
+            <xs:enumeration value="TRAIN"/>
+            <xs:enumeration value="CAR"/>
+            <xs:enumeration value="SHIP"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="hotelCharacteristicsType">
+        <xs:sequence>
+            <xs:element name="hotelStars">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="1"/>
+                        <xs:maxInclusive value="5"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="nutrition" type="nutritionType"/>
+            <xs:element name="roomsNumber">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:pattern value="[1234]"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="additionalDevice" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:simpleType name="nutritionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ONLY_BED"/>
+            <xs:enumeration value="BED_AND_BREAKFAST"/>
+            <xs:enumeration value="HALF_BOARD"/>
+            <xs:enumeration value="FULL_BOARD"/>
+            <xs:enumeration value="ALL_INCLUSIVE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
