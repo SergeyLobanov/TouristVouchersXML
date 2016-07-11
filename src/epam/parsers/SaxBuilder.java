@@ -28,6 +28,7 @@ public class SaxBuilder extends AbstractTouristVouchersBuilder{
 
     @Override
     public void buildListOfTouristVouchers(String fileName) {
+        System.out.println("SAX Parser");
         try {
             //XML document processing
             reader.parse(fileName);

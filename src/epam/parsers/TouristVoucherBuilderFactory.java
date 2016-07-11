@@ -1,5 +1,7 @@
 package epam.parsers;
 
+import java.util.EnumSet;
+
 /**
  * Created by Сергей on 10.07.2016.
  */
@@ -23,6 +25,15 @@ public class TouristVoucherBuilderFactory {
                 throw new EnumConstantNotPresentException(
                         type.getDeclaringClass(), type.name());
         }
+    }
+
+    public static boolean isParserType(String value) {
+        for (ParserType parserType : ParserType.values()) {
+            if (value.toUpperCase().equals(parserType.name())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

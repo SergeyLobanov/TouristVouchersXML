@@ -5,9 +5,9 @@ package epam.view;
  */
 public class View {
     public static final String VALIDATION = "Validation: ";
+    public static final String ASK_TO_PARSE = "Do you want to parse XML file?(y/n)";
     public static final String ENTER_PARSER = "Enter parser type (sax, stax, dom): ";
-    public static final String WRONG_PARSER = "This type of parser is not served";
-    public static final String WRONG_INPUT_DATA = "Enter correct value";
+    public static final String WRONG_PARSER = "This type of parser is not served: ";
     public static final String END_WORK = "Goodbye!";
     public static final String XML_VALID = " xml is valid.";
     public static final String XML_INVALID = " xml is invalid, because ";

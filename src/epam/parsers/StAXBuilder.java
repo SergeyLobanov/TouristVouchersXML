@@ -25,6 +25,7 @@ public class StAXBuilder extends AbstractTouristVouchersBuilder{
 
     @Override
     public void buildListOfTouristVouchers(String fileName) {
+        System.out.println("StAX Parser");
         FileInputStream inputStream = null;
         XMLStreamReader reader = null;
         String name;

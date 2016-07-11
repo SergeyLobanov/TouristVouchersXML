@@ -32,6 +32,7 @@ public class DOMBuilder extends AbstractTouristVouchersBuilder {
 
     @Override
     public void buildListOfTouristVouchers(String fileName) {
+        System.out.println("DOM Parser");
         Document doc = null;
         try {
             // parsing of XML and creating of tree structure
