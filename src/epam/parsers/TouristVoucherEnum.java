@@ -1,5 +1,7 @@
 package epam.parsers;
 
+import epam.controller.Controller;
+
 /**
  * Created by Сергей on 09.07.2016.
  */
@@ -39,10 +41,9 @@ public enum TouristVoucherEnum {
         StringBuilder res1 = new StringBuilder();
 
         for(String a : res) {
-            res1.append(a + "_");
+            res1.append(a + Controller.UNDERSCORE);
         }
         //res1.delete(res1.length() - 1, res1.length());
-        //String res2 = res1.toString().substring(0, res1.length()-1).toUpperCase();
         return valueOf(res1.toString().substring(0, res1.length()-1).toUpperCase());
     }
 }

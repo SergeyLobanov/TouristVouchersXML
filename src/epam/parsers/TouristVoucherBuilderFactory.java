@@ -1,7 +1,5 @@
 package epam.parsers;
 
-import java.util.EnumSet;
-
 /**
  * Created by Сергей on 10.07.2016.
  */

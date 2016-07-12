@@ -24,7 +24,7 @@ public class SaxParser extends DefaultHandler {
     public SaxParser() {
         this.touristVouchers = new ArrayList<>();
         this.withText = EnumSet.range(TouristVoucherEnum.VOUCHER_KIND,
-                TouristVoucherEnum.VOUCHER_COST);
+                                      TouristVoucherEnum.VOUCHER_COST);
     }
 
     public List<TouristVoucher> getTouristVouchers() {
@@ -42,7 +42,7 @@ public class SaxParser extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName,
                              Attributes attributes) throws SAXException {
-        if ("touristVoucher".equals(localName)) {
+        if (TouristVoucherEnum.TOURIST_VOUCHER.getValue().equals(localName)) {
             currentVoucher = new TouristVoucher();
             currentVoucher.setId(attributes.getValue(0));
         } else {
@@ -56,7 +56,7 @@ public class SaxParser extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if ("touristVoucher".equals(localName)) {
+        if (TouristVoucherEnum.TOURIST_VOUCHER.getValue().equals(localName)) {
             touristVouchers.add(currentVoucher);
         }
     }
@@ -79,13 +79,16 @@ public class SaxParser extends DefaultHandler {
                     currentVoucher.setTransport(TransportType.valueOf(s));
                     break;
                 case HOTEL_STARS:
-                    currentVoucher.getHotelCharacteristics().setHotelStars(Integer.parseInt(s));
+                    currentVoucher.getHotelCharacteristics()
+                                    .setHotelStars(Integer.parseInt(s));
                     break;
                 case NUTRITION:
-                    currentVoucher.getHotelCharacteristics().setNutrition(NutritionType.valueOf(s));
+                    currentVoucher.getHotelCharacteristics()
+                                    .setNutrition(NutritionType.valueOf(s));
                     break;
                 case ROOMS_NUMBER:
-                    currentVoucher.getHotelCharacteristics().setRoomsNumber(Integer.parseInt(s));
+                    currentVoucher.getHotelCharacteristics()
+                                    .setRoomsNumber(Integer.parseInt(s));
                     break;
                 case ADDITIONAL_DEVICE:
                     currentVoucher.getHotelCharacteristics().addAdditionalDevice(s);

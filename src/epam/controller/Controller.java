@@ -12,7 +12,6 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
-import java.util.EnumSet;
 import java.util.Scanner;
 
 /**
@@ -24,33 +23,30 @@ public class Controller {
     public static final String XSD_DIRECTORY = "src/epam/xml/TouristVoucherScheme.xsd";
     public static final String LANGUAGE = XMLConstants.W3C_XML_SCHEMA_NS_URI;
     public static final String YES ="y";
+    public static final String UNDERSCORE = "_";
 
-    private View view;
-
-    public Controller(View view) {
-        this.view = view;
-    }
+    public Controller() {}
 
     public void processXML() {
 
         Scanner sc = new Scanner(System.in);
 
-        view.printMessage(View.VALIDATION);
+        View.printMessage(View.VALIDATION);
         validateXMLWithXSD(XML_DIRECTORY, XSD_DIRECTORY);
 
 
         while(true) {
-            view.printMessage(View.ASK_TO_PARSE);
+            View.printMessage(View.ASK_TO_PARSE);
             String enter = enterValue(sc);
             if (!enter.equals(YES)) {
                 break;
             }
 
-            view.printMessage(View.ENTER_PARSER);
+            View.printMessage(View.ENTER_PARSER);
             String parser = enterValue(sc);
             if (!TouristVoucherBuilderFactory.isParserType(parser)) {
-                view.printMessage(View.WRONG_PARSER + parser);
-                view.printMessage(View.ENTER_PARSER);
+                View.printMessage(View.WRONG_PARSER + parser);
+                View.printMessage(View.ENTER_PARSER);
                 parser = enterValue(sc);
                 parseXML(parser);
                 continue;
@@ -58,7 +54,7 @@ public class Controller {
             parseXML(parser);
         }
 
-        view.printMessage(View.END_WORK);
+        View.printMessage(View.END_WORK);
     }
 
     private void parseXML(String parserType) {
@@ -78,14 +74,15 @@ public class Controller {
             Validator validator = schema.newValidator();
             Source source = new StreamSource(xmlPath);
             validator.validate(source);
-            view.printMessage(xmlPath + View.XML_VALID);
+            View.printMessage(xmlPath + View.XML_VALID);
         } catch (SAXException | IOException e) {
-            view.printMessage(xmlPath + View.XML_INVALID + e.getMessage());
+            View.printMessage(xmlPath + View.XML_INVALID + e.getMessage());
         }
     }
 
     private String enterValue(Scanner sc) {
         while( !sc.hasNextLine()) {
+            View.printMessage(View.WRONG_INPUT_DATA);
             sc.nextLine();
         }
 

@@ -1,7 +1,6 @@
 package epam;
 
 import epam.controller.Controller;
-import epam.view.View;
 
 /**
  * Created by Сергей on 05.07.2016.
@@ -9,7 +8,7 @@ import epam.view.View;
 public class TouristVoucherMain {
 
     public static void main(String[] args) {
-        Controller controller = new Controller(new View());
+        Controller controller = new Controller();
         controller.processXML();
     }
 }

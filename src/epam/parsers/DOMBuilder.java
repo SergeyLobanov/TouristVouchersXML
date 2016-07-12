@@ -1,6 +1,7 @@
 package epam.parsers;
 
 import epam.entity.*;
+import epam.view.View;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -26,30 +27,28 @@ public class DOMBuilder extends AbstractTouristVouchersBuilder {
         try {
             docBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            System.out.println("Parsers configuration error: " + e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void buildListOfTouristVouchers(String fileName) {
-        System.out.println("DOM Parser");
+        View.printMessage(View.DOM_PARSER);
         Document doc = null;
         try {
             // parsing of XML and creating of tree structure
             doc = docBuilder.parse(fileName);
             Element root = doc.getDocumentElement();
 
-            NodeList touristVouchersList = root.getElementsByTagName("touristVoucher");
+            NodeList touristVouchersList = root
+                        .getElementsByTagName(TouristVoucherEnum.TOURIST_VOUCHER.getValue());
             for (int i = 0; i < touristVouchersList.getLength(); i++) {
                 Element touristVoucherElement = (Element) touristVouchersList.item(i);
                 TouristVoucher touristVoucher = buildTouristVoucher(touristVoucherElement);
                 touristVouchers.add(touristVoucher);
-            } 
-            
-        } catch (IOException e) {
-            System.out.println("IO exception: " + e);
-        } catch (SAXException e) {
-            System.out.println("Parsing failure: " + e);
+            }
+        } catch (IOException | SAXException e) {
+            e.printStackTrace();
         }
     }
 
@@ -70,7 +69,7 @@ public class DOMBuilder extends AbstractTouristVouchersBuilder {
         HotelCharacteristics hotelCharacteristics = touristVoucher.getHotelCharacteristics();
 
         Element hotelCharacteristicsElement = (Element) touristVoucherElement.getElementsByTagName(
-                               TouristVoucherEnum.HOTEL_CHARACTERISTICS.getValue()).item(0);
+                        TouristVoucherEnum.HOTEL_CHARACTERISTICS.getValue()).item(0);
         Integer hotelStars = Integer.parseInt(getElementTextContent(hotelCharacteristicsElement,
                         TouristVoucherEnum.HOTEL_STARS.getValue()));
         hotelCharacteristics.setHotelStars(hotelStars);

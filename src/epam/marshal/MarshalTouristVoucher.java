@@ -1,5 +1,6 @@
 package epam.marshal;
 
+import epam.controller.Controller;
 import epam.generated.*;
 
 import javax.xml.bind.JAXBContext;
@@ -23,14 +24,11 @@ public class MarshalTouristVoucher {
             TouristVoucherType touristVoucher1 = new TouristVoucherType(VoucherKindType.RECREATION,
                     "Spain", BigInteger.valueOf(20), TransportType.CAR, hotel, BigInteger.valueOf(3000), "TV-0007");
             tvs.addTouristVoucher(touristVoucher1);
-            m.marshal(tvs, new FileOutputStream("src/epam/xml/marshaled.xml"));
+            m.marshal(tvs, new FileOutputStream(Controller.XML_DIRECTORY));
             m.marshal(tvs, System.out);
             System.out.println("OK");
-        } catch (FileNotFoundException e) {
-            System.out.println("XML creating error" + e);
-        } catch (JAXBException e) {
+        } catch (FileNotFoundException | JAXBException e) {
             e.printStackTrace();
-            System.out.println("JAXB error context " + e);
         }
     }
 

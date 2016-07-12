@@ -1,6 +1,7 @@
 package epam.parsers;
 
 import epam.entity.*;
+import epam.view.View;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -8,7 +9,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -25,12 +25,11 @@ public class StAXBuilder extends AbstractTouristVouchersBuilder{
 
     @Override
     public void buildListOfTouristVouchers(String fileName) {
-        System.out.println("StAX Parser");
-        FileInputStream inputStream = null;
+        View.printMessage(View.STAX_PARSER);
+
         XMLStreamReader reader = null;
         String name;
-        try {
-            inputStream = new FileInputStream((new File(fileName)));
+        try (FileInputStream inputStream = new FileInputStream((new File(fileName)))) {
             reader = inputFactory.createXMLStreamReader(inputStream);
             //StAX parsing
             while (reader.hasNext()) {
@@ -44,18 +43,8 @@ public class StAXBuilder extends AbstractTouristVouchersBuilder{
                     }
                 }
             }
-        } catch (XMLStreamException e) {
-            System.out.println("StAX parsing error: " + e.getMessage());
-        } catch (FileNotFoundException e) {
-            System.out.println("File " + fileName + " not found! " + e);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Impossible close file " + fileName + " : " + e);
-            }
+        } catch (XMLStreamException | IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -63,8 +52,7 @@ public class StAXBuilder extends AbstractTouristVouchersBuilder{
                                                     throws XMLStreamException {
         TouristVoucher touristVoucher = new TouristVoucher();
 
-        touristVoucher.setId(reader.getAttributeValue(null,
-                                TouristVoucherEnum.ID.getValue()));
+        touristVoucher.setId(reader.getAttributeValue(null, TouristVoucherEnum.ID.getValue()));
         String name;
         while (reader.hasNext()) {
             int type = reader.next();
@@ -99,14 +87,14 @@ public class StAXBuilder extends AbstractTouristVouchersBuilder{
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (TouristVoucherEnum.stringToEnum(name) ==
-                            TouristVoucherEnum.TOURIST_VOUCHER) {
+                    if (TouristVoucherEnum.stringToEnum(name)
+                            == TouristVoucherEnum.TOURIST_VOUCHER) {
                         return touristVoucher;
                     }
                     break;
             }
         }
-        throw new XMLStreamException("Unknown element in tag TouristVoucher");
+        throw new XMLStreamException();
     }
 
     private HotelCharacteristics getXMLHotelCharacteristics(XMLStreamReader reader)
@@ -139,14 +127,14 @@ public class StAXBuilder extends AbstractTouristVouchersBuilder{
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (TouristVoucherEnum.stringToEnum(name) ==
-                            TouristVoucherEnum.HOTEL_CHARACTERISTICS) {
+                    if (TouristVoucherEnum.stringToEnum(name)
+                            == TouristVoucherEnum.HOTEL_CHARACTERISTICS) {
                         return hotelCharacteristics;
                     }
                     break;
             }
         }
-        throw new XMLStreamException("Unknown element in tag HotelCharacteristics");
+        throw new XMLStreamException();
     }
 
     private String getXMLText(XMLStreamReader reader) throws XMLStreamException {
